@@ -4,7 +4,7 @@
 # Assignment #: 2
 # Due Date: 2/16/2022 no later than 5:15 pm.
 
-printf "%s" "Enter 4 Integer Values ----->"
+printf "\n%s" "Enter 4 Integer Values ----->"
 read num1 num2 num3 num4
 
 if [ -z $num1 ] || [ -z $num2 ] || [ -z $num3 ] || [ -z $num4 ];then
