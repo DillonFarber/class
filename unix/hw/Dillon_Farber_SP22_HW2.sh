@@ -18,21 +18,11 @@ fi
 printf "\n%s %d %d %d %d\n" "1) You Entered " $num1 $num2 $num3 $num4
 
 # 2)
-if [ $num1 -lt $num2 ];then
-    if [ $num1 -lt $num3 ];then
-        if [ $num1 -lt $num4 ]; then
-            smallest=$num1
-        fi
-    fi
-fi
-if [ $num2 -lt $num1 ];then
-    if [ $num2 -lt $num3 ];then
-        if [ $num2 -lt $num4 ];then
-            smallest=$num2
-        fi
-    fi
-fi
-if [ $num3 -lt $num4 ];then
+if [ $num1 -lt $num2 ] && [ $num1 -lt $num3 ] && [ $num1 -lt $num4 ];then
+    smallest=$num1
+elif [ $num2 -lt $num1 ] && [ $num2 -lt $num3 ] && [ $num2 -lt $num4 ];then
+    smallest=$num2
+elif [ $num3 -lt $num4 ];then
     smallest=$num3
 else
     smallest=$num4
@@ -40,21 +30,11 @@ fi
 printf "%s %d\n" "2) The Smallest Integer is " $smallest
 
 # 3)
-if [ $num1 -gt $num2 ];then
-    if [ $num1 -gt $num3 ];then
-        if [ $num1 -gt $num4 ];then
-            largest=$num1
-        fi
-    fi
-fi
-if [ $num2 -gt $num1 ];then
-    if [ $num2 -gt $num3 ];then
-        if [ $num2 -gt $num4 ]; then
-            largest=$num2
-        fi
-    fi
-fi
-if [ $num3 -gt $num4 ];then
+if [ $num1 -gt $num2 ] && [ $num1 -gt $num3 ] && [ $num1 -gt $num4 ];then
+    largest=$num1
+elif [ $num2 -gt $num1 ] && [ $num2 -gt $num3 ] && [ $num2 -gt $num4 ]; then
+    largest=$num2
+elif [ $num3 -gt $num4 ];then
     largest=$num3
 else
     largest=$num4
