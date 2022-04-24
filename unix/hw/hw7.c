@@ -10,8 +10,10 @@
 #include <pthred.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
-pthread_mutex_t lock;
+pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 int RESULT = 0;
 
 void* thread_1(void* arg);
@@ -82,7 +84,32 @@ int main()
 void* thread_1(void* arg)
 {
     pthread_mutex_lock(&lock);
-
+    int result = arg/arg;
     RESULT += result;
+    pthread_mutex_unlock(&lock);
+    return result;
+}
+void* thread_2(void* arg)
+{
+    pthread_mutex_lock(&lock);
+    int result = (arg + arg)/arg;
+    RESULT += result;
+    pthread_mutex_unlock(&lock);
+    return result;
+}
+void* thread_3(void* arg)
+{
+    pthread_mutex_lock(&lock);
+    int result = sqrt(double(arg));
+    RESULT += result;
+    pthread_mutex_unlock(&lock);
+    return result;
+}
+void* thread_4(void* arg)
+{
+    pthread_mutex_lock(&lock);
+    int result = sqrt(double(arg)) + (arg/arg);
+    RESULT += result;
+    pthread_mutex_unlock(&lock);
     return result;
 }
