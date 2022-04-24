@@ -28,7 +28,7 @@ void* thread_9(void* arg);
 void* thread_10(void* arg);
 void* thread_11(void* arg);
 void* thread_12(void* arg);
-
+int fact(int n);
 
 int main() 
 {
@@ -112,4 +112,32 @@ void* thread_4(void* arg)
     RESULT += result;
     pthread_mutex_unlock(&lock);
     return result;
+}
+void* thread_5(void* arg)
+{
+    pthread_mutex_lock(&lock);
+    int result = sqrt((double)arg);
+    result = fact(result) - result;
+    RESULT += result;
+    pthread_mutex_unlock(&lock);
+}
+int fact(int n)
+{
+    if(n == 0)
+        return 1;
+    else
+        return n * fact(n-1);
+}
+void* thread_6(void* arg)
+{
+    pthread_mutex_lock(&lock);
+    int result = arg/sqrt((double)arg) - ;
+    RESULT += result;
+    pthread_mutex_unlock(&lock);
+    return result;
+}
+void* thread_7(void* arg)
+{
+    pthread_mutex_lock(&lock);
+    int result = 
 }
