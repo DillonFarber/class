@@ -7,7 +7,7 @@
 */
 
 
-#include <pthred.h>
+#include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -32,7 +32,8 @@ int fact(int n);
 
 int main() 
 {
-    pthread_t thread1, thread2, thread3, thread4, thread5 thread6, thread7, thread8, thread9, thread10, thread11, thread12;
+    pthread_t thread1, thread2, thread3, thread4, thread5, thread6, thread7, 
+    thread8, thread9, thread10, thread11, thread12;
     int userNum;
     do
     {
@@ -79,6 +80,21 @@ int main()
 
     pthread_create(&thread12, NULL, thread_12, (void*));
     sleep(1);
+
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+    pthread_join(thread3, NULL);
+    pthread_join(thread4, NULL);
+    pthread_join(thread5, NULL);
+    pthread_join(thread6, NULL);
+    pthread_join(thread7, NULL);
+    pthread_join(thread8, NULL);
+    pthread_join(thread9, NULL);
+    pthread_join(thread10, NULL);
+    pthread_join(thread11, NULL);
+    pthread_join(thread12, NULL);
+
+
 }
 
 void* thread_1(void* arg)
@@ -86,39 +102,48 @@ void* thread_1(void* arg)
     pthread_mutex_lock(&lock);
     int result = arg/arg;
     RESULT += result;
+    printf("%s %d", "Result of the 1st Thread =   ", result);
     pthread_mutex_unlock(&lock);
-    return result;
 }
 void* thread_2(void* arg)
 {
     pthread_mutex_lock(&lock);
     int result = (arg + arg)/arg;
     RESULT += result;
+    printf("%s %d", "Result of the 2nd Thread =   ", result);
     pthread_mutex_unlock(&lock);
-    return result;
 }
 void* thread_3(void* arg)
 {
     pthread_mutex_lock(&lock);
     int result = sqrt(double(arg));
     RESULT += result;
+    printf("%s %d", "Result of the 3rd Thread =   ", result);
     pthread_mutex_unlock(&lock);
-    return result;
 }
 void* thread_4(void* arg)
 {
     pthread_mutex_lock(&lock);
     int result = sqrt(double(arg)) + (arg/arg);
     RESULT += result;
+    printf("%s %d", "Result of the 4th Thread =   ", result);
     pthread_mutex_unlock(&lock);
-    return result;
 }
 void* thread_5(void* arg)
 {
     pthread_mutex_lock(&lock);
     int result = sqrt((double)arg);
-    result = fact(result) - result;
+    result = fact(result) - (arg/arg);
     RESULT += result;
+    printf("%s %d", "Result of the 5th Thread =   ", result);
+    pthread_mutex_unlock(&lock);
+}
+void* thread_6(void* arg)
+{
+    pthread_mutex_lock(&lock);
+    int result = arg - (arg / (sqrt((double)arg)));
+    RESULT += result; 
+    printf("%s %d", "Result of the 6th Thread =   ", result);
     pthread_mutex_unlock(&lock);
 }
 int fact(int n)
@@ -128,16 +153,50 @@ int fact(int n)
     else
         return n * fact(n-1);
 }
-void* thread_6(void* arg)
-{
-    pthread_mutex_lock(&lock);
-    int result = arg/sqrt((double)arg) - ;
-    RESULT += result;
-    pthread_mutex_unlock(&lock);
-    return result;
-}
 void* thread_7(void* arg)
 {
     pthread_mutex_lock(&lock);
-    int result = 
+    int result = (arg + (arg/arg)) - sqrt((double)arg);
+    RESULT += result;
+    printf("%s %d", "Result of the 7th Thread =   ", result);
+    pthread_mutex_unlock(&lock);
+}
+void* thread_8(void* arg)
+{
+    pthread_mutex_lock(&lock);
+    int result = arg - (arg/arg);
+    RESULT += result;
+    printf("%s %d", "Result of the 8th Thread =   ", result);
+    pthread_mutex_unlock(&lock);
+}
+void* thread_9(void* arg)
+{
+    pthread_mutex_lock(&lock);
+    RESULT += arg;
+    printf("%s %d", "Result of the 9th Thread =   ", arg);
+    pthread_mutex_unlock(&lock);
+}
+void* thread_10(void* arg)
+{
+    pthread_mutex_lock(&lock);
+    int result = arg + (arg/arg);
+    RESULT += result;
+    printf("%s %d", "Result of the 10th Thread =   ", result);
+    pthread_mutex_unlock(&lock);
+}
+void* thread_11(void* arg)
+{
+    pthread_mutex_lock(&lock);
+    int result = ((arg * arg) + (arg + arg)) / arg;
+    RESULT += result;
+    printf("%s %d", "Result of the 11th Thread =   ", result);
+    pthread_mutex_unlock(&lock);
+}
+void* thread_12(void* arg)
+{
+    pthread_mutex_lock(&lock);
+    int result = arg + (arg/sqrt((double)arg));
+    RESULT += result; 
+    printf("%s %d", "Result of the 12th Thread =   ", result);
+    pthread_mutex_unlock(&lock);
 }
